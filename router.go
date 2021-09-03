@@ -41,7 +41,8 @@ func (r *trieRouter) Register(method, path string, handler Handler) {
 
 	root := r.trees[method]
 	if root == nil {
-		r.trees[method] = &node{}
+		root = &node{}
+		r.trees[method] = root
 	}
 
 	root.AddHandler([]byte(path), func(resp http.ResponseWriter, req *http.Request, p []UrlParam) {
